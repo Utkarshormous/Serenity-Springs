@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -15,7 +16,9 @@ import AppLayout from './ui/AppLayout';
 import Booking from './pages/Booking';
 import Checkin from './pages/Checkin';
 import ProtectedRoute from './ui/ProtectedRoute';
-import { DarkModeProvider } from './context/DarkModeContext';
+// eslint-disable-next-line no-unused-vars
+import { DarkModeProvider, useDarkMode } from './context/DarkModeContext';
+import Sidebar from './ui/Sidebar';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,6 +27,7 @@ const queryClient = new QueryClient({
     },
   },
 });
+
 function App() {
   return (
     <DarkModeProvider>
@@ -35,7 +39,9 @@ function App() {
             <Route
               element={
                 <ProtectedRoute>
-                  <AppLayout />
+                  <AppLayout>
+                    <Sidebar />
+                  </AppLayout>
                 </ProtectedRoute>
               }>
               <Route index element={<Navigate replace to="dashboard" />} />
